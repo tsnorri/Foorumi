@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 // GET /topics/:id
 router.get('/:id', function(req, res, next) {
 	var topicId = req.params.id;
-	Models.Topic.findOne({ where: { id: topicId }}).then(function(topic) { res.json(topic); });
+	Models.Topic.findOne({ where: { id: topicId }, include: { model: Models.Message }}).then(function(topic) { res.json(topic); });
 });
 
 // POST /topics
