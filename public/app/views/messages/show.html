@@ -1,7 +1,7 @@
 <div class="page-header">
-  <h1>{{message.title}}</h1>
+	<h1>{{message.title}}</h1>
+	<h4 class="media-heading">{{message.User.username}}</h4>
 </div>
-
 <p>{{message.content}}</p>
 
 <h2><ng-pluralize count="message.Replies.length"
@@ -15,18 +15,20 @@
 <ul class="media-list">
 	<li class="media" ng-repeat="r in message.Replies | orderBy: 'createdAt'">
 		<div class="media-body">
-			<h4 class="media-heading">Käyttäjätunnus tähän</h4>
+			<h4 class="media-heading">{{r.User.username}}</h4>
 			<p>{{r.content}}</p>
-			<p class="text-muted">Käyttäjätunnus tähän, {{r.date | date: 'd.M.yyyy HH.mm'}}</p>
+			<p class="text-muted">{{r.User.username}}, {{r.createdAt | date: 'd.M.yyyy HH.mm'}}</p>
 		</div>
 	</li>
 </ul>
 
-<h2>Lisää oma vastauksesi</h2>
-<form name="replyForm">
-	<div class="form-group">
-		<label>Vastaus</label>
-		<textarea class="form-control" required name="replyText" ng-model="newReply.content"></textarea>
-	</div>
-	<button ng-click="sendReply()" class="btn btn-success" ng-disabled="replyForm.$invalid">Lisää vastaus</button>
-</form>
+<div ng-show="userLoggedIn">
+	<h2>Lisää oma vastauksesi</h2>
+	<form name="replyForm">
+		<div class="form-group">
+			<label>Vastaus</label>
+			<textarea class="form-control" required name="replyText" ng-model="newReply.content"></textarea>
+		</div>
+		<button ng-click="sendReply()" class="btn btn-success" ng-disabled="replyForm.$invalid">Lisää vastaus</button>
+	</form>
+</div>

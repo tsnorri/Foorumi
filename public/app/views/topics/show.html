@@ -18,22 +18,23 @@
 				<a ng-href="#/messages/{{m.id}}">{{m.title}}</a>
 			</h4>
 			<p>{{m.content}}</p>
-			<p class="text-muted">Käyttäjätunnus tähän, {{m.date | date: 'd.M.yyyy HH.mm'}}</p>
+			<p class="text-muted">{{m.User.username}}, {{m.createdAt | date: 'd.M.yyyy HH.mm'}}</p>
 		</div>
 	</li>
 </ul>
 
-<h2>Lisää oma viestisi</h2>
-
-<form name="messageForm">
-	<div class="form-group">
-		<label>Otsikko</label>
-		<input type="text" class="form-control" name="title" ng-model="newMessage.title" required>
-	</div>
-	
-	<div class="form-group">
-		<label>Viesti</label>
-		<textarea class="form-control" name="content" ng-model="newMessage.content" required></textarea>
-	</div>
-	<button ng-click="sendMessage()" class="btn btn-success" ng-disabled="messageForm.$invalid">Lisää viesti</button>
-</form>
+<div ng-show="userLoggedIn">
+	<h2>Lisää oma viestisi</h2>
+	<form name="messageForm">
+		<div class="form-group">
+			<label>Otsikko</label>
+			<input type="text" class="form-control" name="title" ng-model="newMessage.title" required>
+		</div>
+		
+		<div class="form-group">
+			<label>Viesti</label>
+			<textarea class="form-control" name="content" ng-model="newMessage.content" required></textarea>
+		</div>
+		<button ng-click="sendMessage()" class="btn btn-success" ng-disabled="messageForm.$invalid">Lisää viesti</button>
+	</form>
+</div>
